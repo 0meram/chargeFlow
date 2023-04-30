@@ -24,6 +24,7 @@ function Note({ note, onDelete, onUpdate }) {
 
     return (
         <div className={`note ${isEditing ? 'editing' : ''}`}>
+            {note.date}
             <div className="note-content">
                 {isEditing ? (
                     <input

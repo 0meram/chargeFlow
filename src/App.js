@@ -10,6 +10,7 @@ function App() {
       title: '',
       content: '',
       id: Date.now(),
+      date: new Date().toLocaleString(),
     };
     setNotes([...notes, newNote]);
   };
