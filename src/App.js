@@ -1,34 +1,38 @@
-import React, { useState } from 'react';
-import Note from './components/Note';
-import './App.css';
+import React, { useState } from 'react'
+import Note from './components/Note'
+import './App.css'
 
 function App() {
-  const [notes, setNotes] = useState([]);
-
+  const [notes, setNotes] = useState(
+    JSON.parse(localStorage.getItem('notes')) || [],
+  )
   const addNote = () => {
     const newNote = {
       title: '',
       content: '',
       id: Date.now(),
       date: new Date().toLocaleString(),
-    };
-    setNotes([...notes, newNote]);
-  };
+    }
+    setNotes([...notes, newNote])
+    localStorage.setItem('notes', JSON.stringify([...notes, newNote]))
+  }
 
   const deleteNote = (id) => {
-    const updatedNotes = notes.filter((note) => note.id !== id);
-    setNotes(updatedNotes);
-  };
+    const updatedNotes = notes.filter((note) => note.id !== id)
+    setNotes(updatedNotes)
+    localStorage.setItem('notes', JSON.stringify(updatedNotes))
+  }
 
   const updateNote = (id, updatedNote) => {
     const updatedNotes = notes.map((note) => {
       if (note.id === id) {
-        return { ...note, ...updatedNote };
+        return { ...note, ...updatedNote }
       }
-      return note;
-    });
-    setNotes(updatedNotes);
-  };
+      return note
+    })
+    setNotes(updatedNotes)
+    localStorage.setItem('notes', JSON.stringify(updatedNotes))
+  }
 
   return (
     <div className="App">
@@ -47,7 +51,7 @@ function App() {
         ))}
       </div>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
